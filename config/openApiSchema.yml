@@ -1,0 +1,173 @@
+openapi: 3.0.3
+info:
+  title: Vehicle Detection API
+  version: 1.0.0
+  description: API for managing vehicle detection data.
+
+paths:
+  /:
+    get:
+      summary: Get all data from the database.
+      responses:
+        200:
+          description: List of all data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+  /cameras:
+    get:
+      summary: Get all available cameras from the database.
+      responses:
+        200:
+          description: List of cameras.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    CameraID:
+                      type: integer
+                    Model:
+                      type: string
+                    Location:
+                      type: string
+
+  /roads:
+    get:
+      summary: Get all available roads from the database.
+      responses:
+        200:
+          description: List of roads.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    RoadID:
+                      type: integer
+                    RoadName:
+                      type: string
+                    Direction:
+                      type: boolean
+
+  /vehicleTypes:
+    get:
+      summary: Get all available vehicle types from the database.
+      responses:
+        200:
+          description: List of vehicle types.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    TypeID:
+                      type: integer
+                    TypeName:
+                      type: string
+
+  /vehicleDetections:
+    get:
+      summary: Get all vehicle detections from the database.
+      responses:
+        200:
+          description: List of vehicle detections.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    DetectionDate:
+                      type: string
+                      format: date-time
+                    VehicleTypeID:
+                      type: integer
+                    CameraID:
+                      type: integer
+                    RoadID:
+                      type: integer
+
+    post:
+      summary: Add a new vehicle detection record to the database.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                CameraID:
+                  type: integer
+                RoadID:
+                  type: integer
+                VehicleTypeName:
+                  type: string
+      responses:
+        201:
+          description: Vehicle detection record added successfully.
+        400:
+          description: Bad request. Invalid vehicle type name.
+
+  /addCamera:
+    post:
+      summary: Add a new camera to the database.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Model:
+                  type: string
+                Location:
+                  type: string
+      responses:
+        201:
+          description: Camera added successfully.
+
+  /addRoad:
+    post:
+      summary: Add a new road to the database.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                RoadName:
+                  type: string
+                Direction:
+                  type: boolean
+      responses:
+        201:
+          description: Road added successfully.
+
+  /addVehicleType:
+    post:
+      summary: Add a new vehicle type to the database.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                TypeName:
+                  type: string
+      responses:
+        201:
+          description: Vehicle type added successfully.
