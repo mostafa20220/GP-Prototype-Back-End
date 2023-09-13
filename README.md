@@ -27,7 +27,7 @@ The Vehicle Detection API provides access to data related to cameras, roads, veh
 - **Example Request**:
 
   ```http
-  GET http://localhost:3000/
+  GET https://gp-prototype-back-end-api.azurewebsites.net/
   ```
 
 - **Example Response**:
@@ -65,7 +65,7 @@ The Vehicle Detection API provides access to data related to cameras, roads, veh
 - **Example Request**:
 
   ```http
-  GET http://localhost:3000/cameras
+  GET https://gp-prototype-back-end-api.azurewebsites.net/cameras
   ```
 
 - **Example Response**:
@@ -93,7 +93,7 @@ The Vehicle Detection API provides access to data related to cameras, roads, veh
 - **Example Request**:
 
   ```http
-  GET http://localhost:3000/roads
+  GET https://gp-prototype-back-end-api.azurewebsites.net/roads
   ```
 
 - **Example Response**:
@@ -121,7 +121,7 @@ The Vehicle Detection API provides access to data related to cameras, roads, veh
 - **Example Request**:
 
   ```http
-  GET http://localhost:3000/vehicleTypes
+  GET https://gp-prototype-back-end-api.azurewebsites.net/vehicleTypes
   ```
 
 - **Example Response**:
@@ -147,7 +147,7 @@ The Vehicle Detection API provides access to data related to cameras, roads, veh
 - **Example Request**:
 
   ```http
-  GET http://localhost:3000/vehicleDetections
+  GET https://gp-prototype-back-end-api.azurewebsites.net/vehicleDetections
   ```
 
 - **Example Response**:
@@ -177,9 +177,7 @@ The Vehicle Detection API provides access to data related to cameras, roads, veh
 - **Example Request**:
 
   ```http
-  POST http://localhost
-
-:3000/addVehicleDetection
+  POST https://gp-prototype-back-end-api.azurewebsites.net/addVehicleDetection
   Content-Type: application/json
 
   {
@@ -205,7 +203,7 @@ The Vehicle Detection API provides access to data related to cameras, roads, veh
 - **Example Request**:
 
   ```http
-  POST http://localhost:3000/addCamera
+  POST https://gp-prototype-back-end-api.azurewebsites.net/addCamera
   Content-Type: application/json
 
   {
@@ -230,7 +228,7 @@ The Vehicle Detection API provides access to data related to cameras, roads, veh
 - **Example Request**:
 
   ```http
-  POST http://localhost:3000/addRoad
+  POST https://gp-prototype-back-end-api.azurewebsites.net/addRoad
   Content-Type: application/json
 
   {
@@ -255,7 +253,7 @@ The Vehicle Detection API provides access to data related to cameras, roads, veh
 - **Example Request**:
 
   ```http
-  POST http://localhost:3000/addVehicleType
+  POST https://gp-prototype-back-end-api.azurewebsites.net/addVehicleType
   Content-Type: application/json
 
   {
