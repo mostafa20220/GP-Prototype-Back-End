@@ -21,7 +21,7 @@ app.use(router);
 
 
 // configure the process.env.port
-process.env.port = 3000;
+process.env.port = 8080;
 
 app.listen(process.env.port);
 

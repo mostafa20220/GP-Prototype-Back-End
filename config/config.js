@@ -1,5 +1,8 @@
 // import * as dotenv from "dotenv";
 const dotenv = require("dotenv");
+
+process.env.NODE_ENV = process.env.NODE_ENV || "development";
+
 dotenv.config({ path: `./config/.env.${process.env.NODE_ENV}`, debug: true });
 // dotenv.config({ path: `..env.${process.env.NODE_ENV}`, debug: true });
 
