@@ -20,7 +20,7 @@ app.use((req, res, next) => {
 app.use(router);
 
 
-// configur the process.env.port
+// configure the process.env.port
 process.env.port = 3000;
 
 app.listen(process.env.port);

@@ -2,7 +2,7 @@ const sql = require("mssql");
 
 class Database {
   config = {};
-  poolconnection = null;
+  poolConnection = null;
   connected = false;
 
   constructor(config) {
@@ -14,7 +14,7 @@ class Database {
     try {
       console.log(`Database connecting...${this.connected}`);
       if (this.connected === false) {
-        this.poolconnection = await sql.connect(this.config);
+        this.poolConnection = await sql.connect(this.config);
         this.connected = true;
         console.log("Database connection successful");
       } else {
@@ -28,7 +28,7 @@ class Database {
 
   async disconnect() {
     try {
-      this.poolconnection.close();
+      this.poolConnection.close();
       console.log("Database connection closed");
     } catch (error) {
       console.error(`Error closing database connection: ${error}`);
@@ -37,7 +37,7 @@ class Database {
 
   async executeQuery(query) {
     await this.connect();
-    const request = this.poolconnection.request();
+    const request = this.poolConnection.request();
     const result = await request.query(query);
 
     return result.rowsAffected[0];
@@ -53,7 +53,7 @@ class Database {
         SELECT * FROM VehicleTypes;
         SELECT * FROM VehicleDetections;
       `;
-      const request = this.poolconnection.request();
+      const request = this.poolConnection.request();
       const result = await request.query(query);
 
       const allData = {
@@ -74,7 +74,7 @@ class Database {
     // await poolConnect;
     await this.connect();
     try {
-      const request = this.poolconnection.request();
+      const request = this.poolConnection.request();
       const result = await request.query("SELECT * FROM Cameras");
       return result.recordset;
     } catch (error) {
@@ -87,7 +87,7 @@ class Database {
     // await poolConnect;
     await this.connect();
     try {
-      const request = this.poolconnection.request();
+      const request = this.poolConnection.request();
       const result = await request.query("SELECT * FROM Roads");
       return result.recordset;
     } catch (error) {
@@ -100,7 +100,7 @@ class Database {
     // await poolConnect;
     await this.connect();
     try {
-      const request = this.poolconnection.request();
+      const request = this.poolConnection.request();
       const result = await request.query("SELECT * FROM VehicleTypes");
       return result.recordset;
     } catch (error) {
@@ -113,7 +113,7 @@ class Database {
     // await poolConnect;
     await this.connect();
     try {
-      const request = this.poolconnection.request();
+      const request = this.poolConnection.request();
       const result = await request.query("SELECT * FROM VehicleDetections");
       return result.recordset;
     } catch (error) {
@@ -127,7 +127,7 @@ class Database {
     await this.connect();
     try {
       const validateVehicleTypeQuery = `SELECT TypeID FROM VehicleTypes WHERE TypeName = @TypeName`;
-      const request = this.poolconnection.request();
+      const request = this.poolConnection.request();
       request.input("TypeName", sql.VarChar(64), vehicleTypeName);
       const validationResult = await request.query(validateVehicleTypeQuery);
 
@@ -157,7 +157,7 @@ class Database {
     await this.connect();
     try {
       const insertQuery = `INSERT INTO Cameras (Model, Location) VALUES (@Model, @Location)`;
-      const request = this.poolconnection.request();
+      const request = this.poolConnection.request();
       request.input("Model", sql.VarChar(64), model);
       request.input("Location", sql.VarChar(64), location);
       await request.query(insertQuery);
@@ -172,7 +172,7 @@ class Database {
     await this.connect();
     try {
       const insertQuery = `INSERT INTO Roads (RoadName, Direction) VALUES (@RoadName, @Direction)`;
-      const request = this.poolconnection.request();
+      const request = this.poolConnection.request();
       request.input("RoadName", sql.VarChar(64), name);
       request.input("Direction", sql.Bit, direction);
       await request.query(insertQuery);
@@ -187,7 +187,7 @@ class Database {
     await this.connect();
     try {
       const insertQuery = `INSERT INTO VehicleTypes (TypeName) VALUES (@TypeName)`;
-      const request = this.poolconnection.request();
+      const request = this.poolConnection.request();
       request.input("TypeName", sql.VarChar(64), typeName);
       await request.query(insertQuery);
     } catch (error) {
