@@ -142,9 +142,6 @@ The Vehicle Detection API provides access to data related to cameras, roads, veh
 
 - **Example Response**:
 
-    #### Notes:-
-    true: Indicates that vehicles travel from **left** to **right**.
-    false: Indicates that vehicles travel from **right** to **left**.
 
   ```json
   [
@@ -160,6 +157,9 @@ The Vehicle Detection API provides access to data related to cameras, roads, veh
     }
   ]
   ```
+- **Notes**:
+  - true: Indicates that vehicles travel from **left** to **right**.
+  - false: Indicates that vehicles travel from **right** to **left**.
 
 ### Get All Vehicle Types
 
@@ -240,6 +240,7 @@ The Vehicle Detection API provides access to data related to cameras, roads, veh
 - **Description**: Add a new vehicle detection record to the database.
 - **Example Request**:
 
+
   ```http
   POST https://gp-prototype-back-end-api.azurewebsites.net/addVehicleDetection
   Content-Type: application/json
@@ -256,6 +257,10 @@ The Vehicle Detection API provides access to data related to cameras, roads, veh
   ```
   Vehicle detection added successfully
   ```
+- **Notes**:
+  - The "vehicleType" value has to be an accepted value or you will receive an error as a response.
+  - You can know the accepted values by making a get request to the endpoint "vehicleTypes" to [Get All Vehicle Types](#get-all-vehicle-types).
+
 
 ### Add Camera
 
