@@ -33,28 +33,72 @@ The Vehicle Detection API provides access to data related to cameras, roads, veh
 - **Example Response**:
 
   ```json
-  [
-    {
-      "CameraID": 1,
-      "Model": "Camera Model 1",
-      "Location": "Location 1"
-    },
-    {
-      "RoadID": 1,
-      "RoadName": "Road A",
-      "Direction": true
-    },
-    {
-      "TypeID": 1,
-      "TypeName": "Sedan"
-    },
-    {
-      "DetectionDate": "2023-09-15T12:00:00Z",
-      "VehicleTypeID": 1,
-      "CameraID": 1,
-      "RoadID": 1
-    }
-  ]
+  {
+    "cameras": [
+        {
+            "CameraID": 1,
+            "Model": "Axis P3245-LV",
+            "Location": "Cairo, Egypt"
+        },
+        {
+            "CameraID": 2,
+            "Model": "Axis P3225-LV Mk II",
+            "Location": "Giza, Egypt"
+        }
+    ],
+    "roads": [
+        {
+            "RoadID": 1,
+            "RoadName": "El-Shohada",
+            "Direction": true
+        },
+        {
+            "RoadID": 2,
+            "RoadName": "Ahmed Zewail",
+            "Direction": false
+        }
+    ],
+    "vehicleTypes": [
+        {
+            "TypeID": 1,
+            "TypeName": "Truck"
+        },
+        {
+            "TypeID": 2,
+            "TypeName": "Car"
+        },
+        {
+            "TypeID": 3,
+            "TypeName": "Van"
+        },
+        {
+            "TypeID": 4,
+            "TypeName": "Bus"
+        },
+        {
+            "TypeID": 5,
+            "TypeName": "Motorcycle"
+        },
+        {
+            "TypeID": 6,
+            "TypeName": "Bicycles"
+        }
+    ],
+    "vehicleDetections": [
+        {
+            "DetectionDate": "2023-09-13T04:10:17.126Z",
+            "VehicleTypeID": 3,
+            "CameraID": 1,
+            "RoadID": 1
+        },
+        {
+            "DetectionDate": "2023-09-13T04:11:27.267Z",
+            "VehicleTypeID": 4,
+            "CameraID": 2,
+            "RoadID": 2
+        }
+    ]
+  }
   ```
 
 ### Get All Cameras
@@ -73,14 +117,14 @@ The Vehicle Detection API provides access to data related to cameras, roads, veh
   ```json
   [
     {
-      "CameraID": 1,
-      "Model": "Camera Model 1",
-      "Location": "Location 1"
+        "CameraID": 1,
+        "Model": "Axis P3245-LV",
+        "Location": "Cairo, Egypt"
     },
     {
-      "CameraID": 2,
-      "Model": "Camera Model 2",
-      "Location": "Location 2"
+        "CameraID": 2,
+        "Model": "Axis P3225-LV Mk II",
+        "Location": "Giza, Egypt"
     }
   ]
   ```
@@ -98,17 +142,21 @@ The Vehicle Detection API provides access to data related to cameras, roads, veh
 
 - **Example Response**:
 
+    #### Notes:-
+    true: Indicates that vehicles travel from **left** to **right**.
+    false: Indicates that vehicles travel from **right** to **left**.
+
   ```json
   [
     {
-      "RoadID": 1,
-      "RoadName": "Road A",
-      "Direction": true
+        "RoadID": 1,
+        "RoadName": "El-Shohada",
+        "Direction": true
     },
     {
-      "RoadID": 2,
-      "RoadName": "Road B",
-      "Direction": false
+        "RoadID": 2,
+        "RoadName": "Ahmed Zewail",
+        "Direction": false
     }
   ]
   ```
@@ -129,12 +177,28 @@ The Vehicle Detection API provides access to data related to cameras, roads, veh
   ```json
   [
     {
-      "TypeID": 1,
-      "TypeName": "Sedan"
+        "TypeID": 1,
+        "TypeName": "Truck"
     },
     {
-      "TypeID": 2,
-      "TypeName": "SUV"
+        "TypeID": 2,
+        "TypeName": "Car"
+    },
+    {
+        "TypeID": 3,
+        "TypeName": "Van"
+    },
+    {
+        "TypeID": 4,
+        "TypeName": "Bus"
+    },
+    {
+        "TypeID": 5,
+        "TypeName": "Motorcycle"
+    },
+    {
+        "TypeID": 6,
+        "TypeName": "Bicycles"
     }
   ]
   ```
@@ -155,16 +219,16 @@ The Vehicle Detection API provides access to data related to cameras, roads, veh
   ```json
   [
     {
-      "DetectionDate": "2023-09-15T12:00:00Z",
-      "VehicleTypeID": 1,
-      "CameraID": 1,
-      "RoadID": 1
+        "DetectionDate": "2023-09-13T04:10:17.126Z",
+        "VehicleTypeID": 3,
+        "CameraID": 1,
+        "RoadID": 1
     },
     {
-      "DetectionDate": "2023-09-16T13:30:00Z",
-      "VehicleTypeID": 2,
-      "CameraID": 2,
-      "RoadID": 2
+        "DetectionDate": "2023-09-13T04:11:27.267Z",
+        "VehicleTypeID": 4,
+        "CameraID": 2,
+        "RoadID": 2
     }
   ]
   ```
@@ -181,18 +245,16 @@ The Vehicle Detection API provides access to data related to cameras, roads, veh
   Content-Type: application/json
 
   {
-    "CameraID": 1,
-    "RoadID": 1,
-    "VehicleTypeName": "Sedan"
+    "vehicleType": "Bus",
+    "roadId": "1",
+    "cameraId": "1"
   }
   ```
 
 - **Example Response**:
 
-  ```json
-  {
-    "message": "Vehicle detection record added successfully."
-  }
+  ```
+  Vehicle detection added successfully
   ```
 
 ### Add Camera
@@ -207,17 +269,15 @@ The Vehicle Detection API provides access to data related to cameras, roads, veh
   Content-Type: application/json
 
   {
-    "Model": "New Camera Model",
-    "Location": "New Location"
+    "model": "Axis P3225-LV Mk ",
+    "location": "Alexandria, Egypt"
   }
   ```
 
 - **Example Response**:
 
-  ```json
-  {
-    "message": "Camera added successfully."
-  }
+  ```
+  Camera Axis P3225-LV Mk  added successfully
   ```
 
 ### Add Road
@@ -232,17 +292,15 @@ The Vehicle Detection API provides access to data related to cameras, roads, veh
   Content-Type: application/json
 
   {
-    "RoadName": "New Road",
-    "Direction": true
+    "name": "Ahmed Zewail",
+    "direction": false
   }
   ```
 
 - **Example Response**:
 
-  ```json
-  {
-    "message": "Road added successfully."
-  }
+  ```
+  Road Ahmed Zewail added successfully
   ```
 
 ### Add Vehicle Type
@@ -257,23 +315,19 @@ The Vehicle Detection API provides access to data related to cameras, roads, veh
   Content-Type: application/json
 
   {
-    "TypeName": "Compact"
+    "typeName": "Bicycles"
   }
   ```
 
 - **Example Response**:
 
-  ```json
-  {
-    "message": "Vehicle type added successfully."
-  }
+  ```
+  Vehicle type Bicycles added successfully
   ```
 
 ## Response Format
 
-- All successful responses include a JSON object with a `message` field indicating the success status.
+- All successful responses include raw text messages indicating the success status.
 - Error responses provide details about the error encountered during the request.
 
 ---
-
-Feel free to customize this README to match your specific API implementation and requirements. It serves as documentation for users who want to interact with your API and provides them with clear instructions and examples.
